@@ -15,7 +15,10 @@ export class HomePage {
     accessToken: string;
     photo: string;
 
+    user: any = {};
+
     constructor(public navCtrl: NavController, public http: Http) {
+
 
     }
 
@@ -56,11 +59,13 @@ export class HomePage {
 
     retrieveProfileData(){
 
-        this.http.get("https://graph.facebook.com/v2.8/me?access_token=" + this.accessToken + "&fields=id,name,email,gender")
+        this.http.get("https://graph.facebook.com/v2.8/me?access_token=" +
+            this.accessToken + "&fields=id,name,email,gender")
             .map(res => res.json()).subscribe(data => {
-                console.log(data);
 
-                this.photo = 'http://graph.facebook.com/' + data.id + '/picture?type=large';
+                this.user = data;
+
+                this.user.photo = 'https://graph.facebook.com/' + data.id + '/picture?type=large';
 
         });
 
