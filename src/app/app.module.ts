@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import {TestComponent} from "../components/test/test";
 import {ProfileComponent} from "../components/profile/profile";
+import {Teams} from "../providers/teams";
 
 @NgModule({
     declarations: [
@@ -30,6 +31,6 @@ import {ProfileComponent} from "../components/profile/profile";
         TabsPage,
         TestComponent
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Teams]
 })
 export class AppModule {}

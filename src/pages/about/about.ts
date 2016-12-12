@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
+import {Teams} from "../../providers/teams";
 
 @Component({
     selector: 'page-about',
@@ -10,7 +11,12 @@ export class AboutPage {
 
     user: any = {};
 
-    constructor(public navCtrl: NavController) {
+    teams: any = [];
+
+    group: string;
+    errorMsg: string;
+
+    constructor(public navCtrl: NavController, public teamsProvider: Teams) {
 
         this.user = {
             id: 2,
@@ -18,7 +24,30 @@ export class AboutPage {
             email: '999@999.com',
             photo: 'assets/img/smurf.jpg',
             gender: 'Female'
+        };
+
+
+
+    }
+
+    getTeams(){
+        this.teamsProvider.getTeams().subscribe(data => {
+            this.teams = data;
+        });
+    }
+
+    getGroupTeams(){
+
+        if(!this.group){
+            this.errorMsg = 'Select Group';
+            return;
         }
+
+        this.errorMsg = null;
+
+        this.teamsProvider.getGroupTeams(this.group).subscribe(data => {
+            this.teams = data;
+        });
 
     }
 

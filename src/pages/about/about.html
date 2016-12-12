@@ -10,4 +10,40 @@
 
     <profile [user]="user"></profile>
 
+    <ion-list>
+        <ion-item>
+            <ion-label>Group</ion-label>
+            <ion-select [(ngModel)]="group">
+                <ion-option value="A">A</ion-option>
+                <ion-option value="B">B</ion-option>
+                <ion-option value="C">C</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+
+    <div color="danger" text-center *ngIf="errorMsg">
+        {{errorMsg}}
+    </div>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button ion-button (click)="getTeams()" >Get Teams</button>
+            </ion-col>
+            <ion-col>
+                <button ion-button (click)="getGroupTeams()">Get Group</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div *ngIf="teams.length > 0" >
+        <div *ngFor="let team of teams">
+            {{team.name}}
+        </div>
+    </div>
+
+    <div *ngIf="teams && teams.length == 0">
+        No teams
+    </div>
+
 </ion-content>
